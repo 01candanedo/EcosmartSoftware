@@ -1,0 +1,63 @@
+<ion-content [fullscreen]="true">
+  <main class="cglobal">
+
+    <section style="height: 40%;">
+      <div class="title">
+        <div class="principal">Welcome Back!</div>
+        <div class="secondary">EcoSmart</div>
+      </div>
+    </section>
+
+    <section class="ccenter">
+      <div class="login-container">
+
+        <section class="principal-log">
+          <div>Login</div>
+        </section>
+
+        <form [formGroup]="loginForm" (ngSubmit)="onLogin()">
+          <ion-item lines="none">
+            <ion-label color="light" position="fixed">Email</ion-label>
+            <ion-input
+              formControlName="email"
+              type="email"
+              fill="solid"
+              shape="round"
+              placeholder="Enter your email"
+              required>
+            </ion-input>
+          </ion-item>
+
+          <ion-item lines="none">
+            <ion-label color="light" position="fixed">Password</ion-label>
+            <ion-input
+              formControlName="password"
+              type="password"
+              fill="solid"
+              shape="round"
+              placeholder="Enter your password"
+              required>
+            </ion-input>
+          </ion-item>
+
+          <ion-button shape="round" expand="full" type="submit" [disabled]="loginForm.invalid">
+            SIGN IN
+          </ion-button>
+        </form>
+
+        <section class="links">
+          <a href="#">Forgot password?</a>
+        </section>
+
+        <section class="links">
+          Need an account? <a [routerLink]="['register']">Create an account here!</a>
+        </section>
+
+        <section style="width: 100%;">
+          <footer class="cpyright">&copy; 2024 EcoSmart. All rights reserved.</footer>
+        </section>
+      </div>
+    </section>
+
+  </main>
+</ion-content>

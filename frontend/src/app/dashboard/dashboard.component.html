@@ -1,0 +1,131 @@
+<ion-content>
+  <ion-header>
+    <ion-toolbar>
+      <ion-buttons slot="start">
+        <ion-button (click)="logout()" class="back-button">
+          <ion-icon name="log-out-outline" class="back-icon"></ion-icon>
+        </ion-button>
+      </ion-buttons>
+    </ion-toolbar>
+  </ion-header>
+  <div class="recycling-container">
+    <h2 class="tittle">Reciclaje</h2>
+
+    <div class="recycling-cards">
+      <ion-card class="recycling-card dark info item1">
+        <div class="icon-container">
+          <ion-icon name="repeat"></ion-icon>
+        </div>
+        <h3>Recicla papel</h3>
+        <p>El papel reciclado ahorra energía, agua y reduce la tala de árboles.</p>
+      </ion-card>
+
+      <ion-card class="recycling-card light info item2">
+        <div class="icon-container">
+          <ion-icon name="repeat"></ion-icon>
+        </div>
+        <h3>Reciclar latas</h3>
+        <p>El aluminio es 100% reciclable. ¡Dale una nueva vida a tus latas!</p>
+      </ion-card>
+
+      <ion-card class="recycling-card centerscolors centers item3">
+        <h3>Centros de Reciclajes</h3>
+        <p>Aquí encontrarás los centros de reciclajes cercanos a tí. Apoyando el programa Basura Cero para promover las llamadas 3Rs (reducir, reutilizar y reciclar)</p>
+
+        <div class="center-list">
+          <ion-list class="list-height">
+            @for(center of center_list; track center.center_id){
+              <ion-item>
+                <ion-row class="item-row">
+                  <ion-col size="10">
+                    <ion-row size="2" class="icon-column ion-align-items-center">
+                      <ion-label class="item-title">{{center.center_id}}. {{center.name}}</ion-label>
+                      <ion-icon name="location-outline"></ion-icon>
+                    </ion-row>
+                    <p class="item-description">
+                    {{center.location}}
+                    </p>
+                    <p class="item-contact">Teléfono: {{center.phone}}</p>
+                  </ion-col>
+                </ion-row>
+              </ion-item>
+            }
+          </ion-list>
+        </div>
+
+      </ion-card>
+
+    </div>
+
+    <div class="objects-section">
+      <h3 class="tittle">Mis Productos</h3>
+      <div class="horizontal-scroll">
+        @for(material of material_list; track material.material_id){
+          <ion-card class="objects-card">
+            <img [src]="material.image" alt="Objetos reciclados">
+            <div class="card-content">
+              <h2>{{material.name}}</h2>
+              <h4>{{material.category_name}}</h4>
+              <p>{{material.description}}</p>
+            </div>
+          </ion-card>
+        }
+      </div>
+    </div>
+
+    <div class="objects-section">
+      <div class="section-header">
+        <h3 class="tittle">Órdenes Activas</h3>
+        <ion-button fill="solid" shape="round" class="admin-button" (click)="goToManageorder()">Administrar</ion-button>
+      </div>
+      @for(order of order_list; track order.order_id){
+        <ion-title>
+          Centro: {{order.center_name}}
+        </ion-title>
+        <div class="horizontal-scroll">
+          @for(material of order.materials; track material.material_id){
+            <ion-card class="objects-card">
+              <img [src]="material.image" alt="Ordenes">
+              <div class="card-content">
+                <h2>{{material.name}}</h2>
+                <h4>{{material.category_name}}</h4>
+                <p class="description-ov">{{material.description}}</p>
+              </div>
+            </ion-card>
+          }
+        </div>
+      }
+    </div>
+
+  </div>
+</ion-content>
+
+<ion-footer>
+  <ion-toolbar>
+    <ion-tabs>
+      <ion-tab-bar slot="bottom">
+
+        <ion-tab-button tab="map" (click)="goToMap()">
+          <ion-icon name="map"></ion-icon>
+          <ion-label>Mapa</ion-label>
+        </ion-tab-button>
+
+        <ion-tab-button tab="product" (click)="goToProduct()">
+          <ion-icon name="heart"></ion-icon>
+          <ion-label>Producto</ion-label>
+        </ion-tab-button>
+
+        <ion-tab-button tab="order" (click)="goToOrder()">
+          <ion-icon name="cube"></ion-icon>
+          <ion-label>Orden</ion-label>
+        </ion-tab-button>
+
+        <ion-tab-button tab="profile" (click)="goToProfile()">
+          <ion-icon name="person"></ion-icon>
+          <ion-label>Perfil</ion-label>
+        </ion-tab-button>
+
+      </ion-tab-bar>
+    </ion-tabs>
+  </ion-toolbar>
+</ion-footer>

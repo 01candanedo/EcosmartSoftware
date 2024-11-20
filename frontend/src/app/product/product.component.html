@@ -1,0 +1,79 @@
+<ion-content>
+  <ion-header>
+    <ion-toolbar>
+      <ion-buttons slot="start">
+        <ion-button (click)="goBack()" class="back-button">
+          <ion-icon name="arrow-back" class="back-icon"></ion-icon>
+        </ion-button>
+      </ion-buttons>
+      <div style="color: #e2f0cc">
+        Product
+      </div>
+    </ion-toolbar>
+  </ion-header>
+  <div class="centered">
+    <div class="recycling-container">
+      <form [formGroup]="productForm" (ngSubmit)="onProduct()" enctype="multipart/form-data">
+        <ion-card class="product-card">
+          <ion-card-header class="product-card-header">
+            <ion-card-title class="product-card-title">Create your Recycling Product</ion-card-title>
+          </ion-card-header>
+
+          <ion-card-content class="product-card-content">
+            <ion-item lines="none">
+              <ion-label color="light" position="fixed">Name</ion-label>
+              <ion-input
+                 formControlName="name"
+                 fill="solid"
+                 shape="round"
+                 placeholder="Enter product name"
+                 required></ion-input>
+            </ion-item>
+
+            <ion-item lines="none">
+              <ion-label color="light" position="fixed">Description</ion-label>
+              <ion-input
+                formControlName="description"
+                fill="solid"
+                shape="round"
+                placeholder="Enter a description"
+                required></ion-input>
+            </ion-item>
+
+            <ion-item lines="none">
+              <ion-label color="light" position="fixed" style="margin-top: 5px">Category: </ion-label>
+              <div class="proton-select">
+                <ion-select formControlName="category" interface="popover" placeholder="Select a type">
+                  @for (category of category_list; track category.category_id){
+                    <ion-select-option [value]="category.category_id">
+                      {{ category.name }}
+                    </ion-select-option>
+                  }
+                </ion-select>
+              </div>
+            </ion-item>
+
+            <ion-item lines="none">
+              <div style="margin-top: 10px; margin-bottom: 10px">
+                <ion-label color="light" position="fixed" style="margin-top: 5px">Image: </ion-label>
+                <ion-input id="image" type="file" fill="solid" (change)="onImageChange($event)" />
+              </div>
+            </ion-item>
+
+            @if(image){
+              <div class="image-preview">
+                <img [src]="image" alt="Product Image" class="product-image" />
+              </div>
+            }
+
+          </ion-card-content>
+          <ion-button shape="round" expand="full" type="submit" [disabled]="productForm.invalid">
+            Create
+          </ion-button>
+        </ion-card>
+      </form>
+
+    </div>
+
+  </div>
+</ion-content>

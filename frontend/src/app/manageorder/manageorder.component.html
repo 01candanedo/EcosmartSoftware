@@ -1,0 +1,57 @@
+<ion-content>
+  <ion-header>
+    <ion-toolbar>
+      <ion-buttons slot="start">
+        <ion-button (click)="goBack()" class="back-button">
+          <ion-icon name="arrow-back" class="back-icon"></ion-icon>
+        </ion-button>
+      </ion-buttons>
+      <div style="color: #e2f0cc">
+        Manage Order
+      </div>
+    </ion-toolbar>
+  </ion-header>
+  <ion-content>
+    <div class="content-wrapper">
+      <ion-title>Gestión de Órdenes</ion-title>
+      <ion-item>
+        <ion-label>Seleccionar orden: </ion-label>
+        <ion-select [(ngModel)]="selectedOrderId" placeholder="Selecciona una orden">
+          @for(order of order_list; track order.order_id){
+            <ion-select-option [value]="order.order_id">
+              {{ order.center_name }}
+            </ion-select-option>
+          }
+        </ion-select>
+      </ion-item>
+      @if(selectedOrderId){
+        @for(material of getSelectedOrder()?.materials; track material.material_id){
+          <ion-card class="custom-card">
+            <ion-card-header class="card-header">
+              <ion-card-title>Información del Producto</ion-card-title>
+            </ion-card-header>
+            <ion-card-content class="card-content">
+              <div class="image-container">
+                <ion-thumbnail slot="start" class="image-thumbnail">
+                  <img [src]="material.image" alt="Icono del producto" />
+                </ion-thumbnail>
+              </div>
+              <p><strong>ID:</strong> {{ material.material_id }}</p>
+              <p><strong>Nombre:</strong> {{ material.name }}</p>
+              <p><strong>Categoría:</strong> {{ material.category_name }}</p>
+              <p><strong>Descripción del producto:</strong> {{ material.description }}</p>
+            </ion-card-content>
+          </ion-card>
+        }
+      }
+    </div>
+    <ion-footer>
+        <ion-button expand="block" color="danger" (click)="deleteOrder()" [disabled]="!selectedOrderId">
+          Eliminar Orden
+        </ion-button>
+        <ion-button expand="block" color="success" (click)="completeOrder()" [disabled]="!selectedOrderId">
+          Completar Orden
+        </ion-button>
+    </ion-footer>
+  </ion-content>
+</ion-content>

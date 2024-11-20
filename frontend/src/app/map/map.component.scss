@@ -1,0 +1,21 @@
+#map {
+  height: 100%;
+  width: 100%;
+}
+
+ion-header {
+  --background: #053144;
+}
+
+ion-toolbar {
+  --background: #053144;
+}
+
+.back-button {
+  --background: transparent;
+  --color: #e2f0cc;
+}
+
+.back-icon {
+  font-size: 1.5rem; /* Adjust icon size */
+}

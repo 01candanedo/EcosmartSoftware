@@ -1,0 +1,74 @@
+<ion-content>
+  <main class="cglobal">
+    <section class="icon">
+      <div>
+        <div class="principal">Sign Up!</div>
+      </div>
+      <ion-card>
+        <ion-img src="/assets/default_avatar.webp"></ion-img>
+      </ion-card>
+    </section>
+
+    <section class="ccenter">
+      <div class="register-container">
+        <form [formGroup]="registerForm" (ngSubmit)="onRegister()">
+          <ion-item lines="none">
+            <ion-label color="light" position="fixed">Name</ion-label>
+            <ion-input
+              formControlName="name"
+              fill="solid"
+              shape="round"
+              placeholder="Enter a name"
+              required>
+            </ion-input>
+          </ion-item>
+
+          <ion-item lines="none">
+            <ion-label color="light" position="fixed">Lastname</ion-label>
+            <ion-input
+              formControlName="lastname"
+              fill="solid"
+              shape="round"
+              placeholder="Enter a lastname"
+              required>
+            </ion-input>
+          </ion-item>
+
+          <ion-item lines="none">
+            <ion-label color="light" position="fixed">Email</ion-label>
+            <ion-input
+              formControlName="email"
+              type="email"
+              fill="solid"
+              shape="round"
+              placeholder="Enter a email"
+              required>
+            </ion-input>
+          </ion-item>
+
+          <ion-item lines="none">
+            <ion-label color="light" position="fixed">Password</ion-label>
+            <ion-input
+              formControlName="password"
+              type="password"
+              fill="solid"
+              shape="round"
+              counter="true"
+              placeholder="Enter a password"
+              required>
+            </ion-input>
+          </ion-item>
+
+          <ion-button shape="round" expand="full" type="submit" [disabled]="registerForm.invalid">
+            SIGN UP
+          </ion-button>
+
+        </form>
+
+        <section class="links">
+          Do you already have an account? <a [routerLink]="['/login']">Click here</a>
+        </section>
+      </div>
+    </section>
+  </main>
+</ion-content>

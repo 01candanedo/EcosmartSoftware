@@ -1,0 +1,77 @@
+<ion-content>
+  <ion-header>
+    <ion-toolbar>
+      <ion-buttons slot="start">
+        <ion-button (click)="goBack()" class="back-button">
+          <ion-icon name="arrow-back" class="back-icon"></ion-icon>
+        </ion-button>
+      </ion-buttons>
+      <div style="color: #e2f0cc">
+        Order
+      </div>
+    </ion-toolbar>
+  </ion-header>
+  <ion-content class="ion-padding">
+    <div class="container">
+      <h1 class="text-2xl font-bold mb-4">Creación de orden</h1>
+
+      <div class="flex space-x-2 mb-4">
+        <ion-select
+          placeholder="Seleccione un punto de reciclaje"
+          [(ngModel)]="center_selected"
+        >
+          @for(center of center_list; track center.center_id){
+            <ion-select-option [value]="center.center_id">
+              {{ center.name }}
+            </ion-select-option>
+          }
+        </ion-select>
+      </div>
+
+      <div class="flex space-x-2 mb-4">
+        <ion-select
+          placeholder="Seleccione un producto"
+          [(ngModel)]="currentSelection"
+        >
+          @for(item of remainingItems; track item.material_id){
+            <ion-select-option [value]="item">
+              {{ item.name }}
+            </ion-select-option>
+          }
+        </ion-select>
+
+        <ion-button (click)="addItem()" [disabled]="!currentSelection">
+          Añadir
+        </ion-button>
+      </div>
+
+      <ion-list>
+        <ion-item-sliding *ngFor="let item of selectedItems">
+          <ion-item>
+            <ion-label>{{ item.name }}</ion-label>
+            <ion-button
+              fill="clear"
+              slot="end"
+              (click)="removeItem(item)"
+            >
+              <ion-icon name="close-outline"></ion-icon>
+            </ion-button>
+          </ion-item>
+        </ion-item-sliding>
+      </ion-list>
+
+      @if(selectedItems.length === 0){
+        <p class="text-gray-500 text-center mt-4">
+          No hay artículos seleccionados. Utilice el menú desplegable para agregar elementos.
+        </p>
+      }
+
+    </div>
+  </ion-content>
+  <ion-footer>
+    <ion-button expand="block" (click)="crearOrden()">
+      Crear
+    </ion-button>
+  </ion-footer>
+</ion-content>
+
