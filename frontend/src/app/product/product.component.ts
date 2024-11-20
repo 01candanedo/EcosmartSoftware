@@ -79,7 +79,7 @@ export class ProductComponent implements OnInit {
       const formValues: any = this.productForm.value;
       formData.append('name', formValues.name);
       formData.append('description', formValues.description);
-      formData.append('category', "1");
+      formData.append('category', formValues.category);
       formData.append('image', formValues.image);
       this.productService.postCreateProduct(formData, this.async_storage.access_token.toString()).subscribe(
         async response  => {
